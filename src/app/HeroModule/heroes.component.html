@@ -1,0 +1,17 @@
+<h2>My Heroes</h2>
+
+<!--[class.selected] : '[]' this is the syntax of property binding in which data flows from 
+                        data source to a property of class. So if hero == selectedHero will 
+                        be true then class.selected CSS will be applied to that li element. -->
+
+<!--(click)="onSelect(hero) : 
+                        '()' this will identify click event of li element and pass hero 
+                        object to onSelect function. -->
+
+<ul class="heroes">
+    <li *ngFor="let hero of heroes" [class.selected]="hero === selectedHero" (click)="onSelect(hero)">
+        <span class="badge">{{hero.id}}</span> {{hero.name}}
+    </li>
+</ul>
+<!-- Calling another component from here name "my-hero-detail" in which we are passing selectedHero object. -->
+<my-hero-detail [hero]="selectedHero"></my-hero-detail>
