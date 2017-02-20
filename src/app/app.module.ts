@@ -27,6 +27,10 @@ import { HttpModule } from '@angular/http';
       {
         path : 'dashboard',
         component : DashboardComponent
+      },
+      {
+        path : 'detail/:id',
+        component : HeroDetailComponent
       }
     ])
   ],
