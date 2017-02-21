@@ -8,11 +8,17 @@
                         '()' this will identify click event of li element and pass hero 
                         object to onSelect function. -->
 
+<!-- Pipes are a good way to format strings, currency amounts, dates and other display data. -->
+
 <ul class="heroes">
     <li *ngFor="let hero of heroes" [class.selected]="hero === selectedHero" (click)="onSelect(hero)">
         <span class="badge">{{hero.id}}</span> {{hero.name}}
     </li>
 </ul>
-<!-- Calling another component from here name "my-hero-detail" in which we are passing selectedHero object. -->
-<!--hero-detail.component.ts-->
-<my-hero-detail [hero]="selectedHero"></my-hero-detail>
+
+<div *ngIf = "selectedHero">
+    <h2>
+        {{ selectedHero.name | uppercase }} is my hero.
+    </h2>
+    <button (click) = "gotoDetails()"> View Details</button>
+</div>
