@@ -13,7 +13,7 @@ import 'rxjs/add/operator/switchMap';
 
 export class HeroDetailComponent implements OnInit {
     // taking input from its parent [here `heroes.component.html`] and setting value of hero object.
-    @Input()
+    // @Input()
     hero : Hero;
 
     constructor(
@@ -31,6 +31,4 @@ export class HeroDetailComponent implements OnInit {
     goBack(): void {
          this.location.back();
     }
-
-    
 }
