@@ -11,6 +11,7 @@ import { Component } from '@angular/core';
                 <a routerLink="/heroes">Heroes</a>
             </nav>
             <router-outlet></router-outlet>
+            <template ngbModalContainer></template>
             `
 })
 //RouterOutlet is one of the directives provided by the RouterModule.

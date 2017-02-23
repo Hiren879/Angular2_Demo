@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { Hero } from './hero';
-import { OnInit } from '@angular/core';
+import { OnInit } from '@angular/core';  
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 import { HeroService } from './hero.service';
-import { Router } from '@angular/router';
+import { HeroDetailModalComponent } from './hero-detail-modal.component';
+import { Hero } from './hero';
 
 @Component({
   moduleId: module.id,
@@ -17,7 +19,7 @@ export class HeroesComponent implements OnInit {
 
   // constructor for heroService
   constructor (private heroService : HeroService,
-               private router : Router) {}
+              private modalService: NgbModal) {}
 
   ngOnInit(): void {
     this.getHeroes();
@@ -28,10 +30,24 @@ export class HeroesComponent implements OnInit {
   }
 
   getHeroes() : void {
-    this.heroService.getHeroesREST().subscribe(newHeroes => this.heroes = newHeroes);
+    this.heroService.getHeroes().then(newHeroes => this.heroes = newHeroes);
   }
 
   gotoDetails() : void {
-    this.router.navigate(['/detail',this.selectedHero.id]);
+    
+    const modalRef = this.modalService.open(HeroDetailModalComponent);
+    //create copy of selected hero so that original hero doesn't get updated during update in modal
+    modalRef.componentInstance.hero = Object.assign({}, this.selectedHero);
+    modalRef.componentInstance.title = this.selectedHero.name;
+    modalRef.result.then(
+      (updatedHero) => {
+        //edited hero save here and notify user and update in list as well
+        console.log(updatedHero);
+        this.selectedHero = updatedHero;
+      },
+      (cancelled) => {
+        //modal cancelled
+      }
+    );
   }
 }
